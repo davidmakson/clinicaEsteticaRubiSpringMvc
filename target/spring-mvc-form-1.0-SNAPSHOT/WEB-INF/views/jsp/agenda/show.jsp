@@ -25,7 +25,7 @@
 
 	<div class="row">
 		<label class="col-sm-2">Cliente</label>
-		<div class="col-sm-10">${agenda.cliente}</div>
+		<div class="col-sm-10">${agenda.contato}</div>
 	</div>
 
 	<div class="row">
@@ -43,6 +43,11 @@
 		<div class="col-sm-10">${agenda.dtAgenda}</div>
 	</div>
 
+	<div class="row">
+		<label class="col-sm-2">Hora</label>
+		<div class="col-sm-10">${agenda.horaAgenda}</div>
+	</div>
+	
 	<div class="row">
 		<label class="col-sm-2">Observação</label>
 		<div class="col-sm-10">${agenda.obs}</div>

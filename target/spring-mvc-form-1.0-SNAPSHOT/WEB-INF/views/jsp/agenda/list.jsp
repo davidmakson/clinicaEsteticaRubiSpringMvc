@@ -27,10 +27,11 @@
 			<thead>
 				<tr>
 					<th>#ID</th>
-					<th>Contato</th>
+					<th>Cliente</th>
 					<th>Funcionario</th>
 					<th>Serviço</th>
 					<th>Data</th>
+					<th>Hora</th>
 					<th>Obs</th>
 				</tr>
 			</thead>
@@ -42,6 +43,7 @@
 					<td>${agenda.funcionario}</td>
 					<td>${agenda.servico}"</td>
 					<td>${agenda.dtAgenda}"</td>
+					<td>${agenda.horaAgenda}"</td>
 					<td>${agenda.obs}"</td>
 					<td>
 						<spring:url value="/users/${agenda.id}" var="userUrl" />

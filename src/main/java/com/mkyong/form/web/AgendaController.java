@@ -1,5 +1,8 @@
 package com.mkyong.form.web;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,11 +58,22 @@ public class AgendaController {
 		
 		Agenda agenda = new Agenda();
 		
+		populaCombos(model);
+		
 		model.addAttribute("agendaform",agenda);
 		return "agenda/agendaform";
 	}
 	
-	// save or update user
+	private void populaCombos(Model model) {
+		List<User> contatoList =  new ArrayList<User>;
+		
+		List<User> funcionarioList = new ArrayList<User>;
+		
+		List<Servico> servicoList =  new ArrayList<Servico>;
+		
+	}
+
+		// save or update user
 		@RequestMapping(value = "/agenda/add", method = RequestMethod.POST)
 		public String saveOrUpdateUser(@ModelAttribute("agendaform") @Validated Agenda agenda,
 				BindingResult result, Model model, final RedirectAttributes redirectAttributes) {

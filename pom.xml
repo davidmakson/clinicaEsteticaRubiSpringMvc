@@ -5,7 +5,7 @@
 	<artifactId>spring-mvc-form</artifactId>
 	<packaging>war</packaging>
 	<version>1.0-SNAPSHOT</version>
-	<name>SpringMVC + Form Handling Example</name>
+	<name>clinicaEsteticaRubiSpringMvc</name>
 
 	<properties>
 		<jdk.version>1.7</jdk.version>
@@ -18,6 +18,13 @@
 	</properties>
 
 	<dependencies>
+	
+		<!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+		<dependency>
+		    <groupId>mysql</groupId>
+		    <artifactId>mysql-connector-java</artifactId>
+		    <version>5.1.6</version>
+		</dependency>
 
 		<dependency>
 			<groupId>org.springframework</groupId>

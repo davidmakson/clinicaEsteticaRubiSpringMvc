@@ -23,7 +23,7 @@ public class User {
 	String confirmPassword;
 
 	// form:checkbox - single checkbox
-	boolean isFunc;
+	boolean isFunc = false;
 
 	// form:radiobutton - radio button
 	String sex;
@@ -122,10 +122,10 @@ public class User {
 
 	@Override
 	public String toString() {
-		return "User [id=" + id + ", name=" + name + ", email=" + email + ", address=" + address
-				+ ", password=" + password + ", confirmPassword=" + confirmPassword
-				+ ", sex=" + sex
-				+ ", dtNasct=" + dtNasct + ", cidade=" + cidade + ", obs=" + obs +"isNew="+ isNew() + "isFunc=" +isFunc();
+		return "User [id=" + id  + ", name=" + name + ", email=" + email + ", address=" + address
+				+ ", password="  + password + ", confirmPassword=" + confirmPassword
+				+ ", sex=" + sex + ", dtNasct=" + dtNasct + ", cidade=" + cidade 
+				+ ", obs=" + obs + " isNew="+ isNew() + "isFunc=" +isFunc();
 	}
 
 	public String getObs() {

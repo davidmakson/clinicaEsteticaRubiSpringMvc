@@ -44,33 +44,18 @@
 	</div>
 
 	<div class="row">
-		<label class="col-sm-2">Newsletter</label>
-		<div class="col-sm-10">${user.newsletter}</div>
+		<label class="col-sm-2">Cidade</label>
+		<div class="col-sm-10">${user.cidade}</div>
 	</div>
 
 	<div class="row">
-		<label class="col-sm-2">Web Frameworks</label>
-		<div class="col-sm-10">${user.framework}</div>
+		<label class="col-sm-2">Data de Nascimento</label>
+		<div class="col-sm-10">${user.dtNasct}</div>
 	</div>
 
 	<div class="row">
-		<label class="col-sm-2">Sex</label>
+		<label class="col-sm-2">Sexo</label>
 		<div class="col-sm-10">${user.sex}</div>
-	</div>
-
-	<div class="row">
-		<label class="col-sm-2">Number</label>
-		<div class="col-sm-10">${user.number}</div>
-	</div>
-
-	<div class="row">
-		<label class="col-sm-2">Country</label>
-		<div class="col-sm-10">${user.country}</div>
-	</div>
-
-	<div class="row">
-		<label class="col-sm-2">Skill</label>
-		<div class="col-sm-10">${user.skill}</div>
 	</div>
 
 </div>

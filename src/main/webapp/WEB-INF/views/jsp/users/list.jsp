@@ -29,22 +29,19 @@
 					<th>#ID</th>
 					<th>Name</th>
 					<th>Email</th>
-					<th>framework</th>
-					<th>Action</th>
 				</tr>
 			</thead>
 
 			<c:forEach var="user" items="${users}">
 				<tr>
-					<td>
-						${user.id}
-					</td>
+					<td>${user.id}</td>
 					<td>${user.name}</td>
 					<td>${user.email}</td>
-					<td><c:forEach var="framework" items="${user.framework}" varStatus="loop">
-						${framework}
-    					<c:if test="${not loop.last}">,</c:if>
+					<%-- <td>
+						<c:forEach var="framework" items="${user.framework}" varStatus="loop">
+							${framework}<c:if test="${not loop.last}">,</c:if>
 						</c:forEach></td>
+					<td> --%>
 					<td>
 						<spring:url value="/users/${user.id}" var="userUrl" />
 						<spring:url value="/users/${user.id}/delete" var="deleteUrl" /> 
@@ -52,7 +49,8 @@
 
 						<button class="btn btn-info" onclick="location.href='${userUrl}'">Query</button>
 						<button class="btn btn-primary" onclick="location.href='${updateUrl}'">Update</button>
-						<button class="btn btn-danger" onclick="this.disabled=true;post('${deleteUrl}')">Delete</button></td>
+						<button class="btn btn-danger" onclick="this.disabled=true;post('${deleteUrl}')">Delete</button>
+					</td>
 				</tr>
 			</c:forEach>
 		</table>

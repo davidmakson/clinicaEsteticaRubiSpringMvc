@@ -115,12 +115,8 @@ public class UserController {
 		user.setAddress("abc 88");
 		//user.setPassword("123");
 		//user.setConfirmPassword("123");
-		user.setNewsletter(true);
 		user.setSex("M");
-		user.setFramework(new ArrayList<String>(Arrays.asList("Spring MVC", "GWT")));
-		user.setSkill(new ArrayList<String>(Arrays.asList("Spring", "Grails", "Groovy")));
-		user.setCountry("SG");
-		user.setNumber(2);
+		user.setCidade("SG");
 
 		model.addAttribute("userForm", user);
 
