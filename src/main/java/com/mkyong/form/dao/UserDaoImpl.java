@@ -17,12 +17,12 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
-import org.springframework.stereotype.Repository;
+import org.springframework.stereotype.Service;
 import org.springframework.util.StringUtils;
 
 import com.mkyong.form.model.User;
 
-@Repository
+@Service("userDao")
 public class UserDaoImpl implements UserDao {
 
 	NamedParameterJdbcTemplate namedParameterJdbcTemplate;
@@ -147,6 +147,27 @@ public class UserDaoImpl implements UserDao {
 		}
 		return result;
 
+	}
+
+	@Override
+	public List<User> findAllFuncionarios() {
+		//String sql = "SELECT * FROM users where isFunc = 1";
+		String sql = "SELECT * FROM users";
+		List<User> result = namedParameterJdbcTemplate.query(sql, new UserMapper());
+
+		return result;
+	}
+
+	@Override
+	public List<User> findAllContatos() {
+		//String sql = "SELECT * FROM users where isFunc = 0";
+		String sql = "SELECT * FROM users";
+		List<User> result = namedParameterJdbcTemplate.query(sql, new UserMapper());
+
+		return result;
+	}
+	public static void main(String[] args){
+		
 	}
 
 /*	private String convertListToDelimitedString(List<String> list) {

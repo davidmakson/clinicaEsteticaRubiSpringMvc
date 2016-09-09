@@ -13,5 +13,9 @@ public interface UserService {
 	void saveOrUpdate(User user);
 	
 	void delete(int id);
+
+	List<User> findAllFuncionarios();
+
+	List<User> findAllContatos();
 	
 }

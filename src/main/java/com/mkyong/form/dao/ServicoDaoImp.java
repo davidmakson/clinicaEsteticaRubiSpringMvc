@@ -24,7 +24,8 @@ public class ServicoDaoImp implements ServicoDao {
 	@Override
 	public List<Servico> findAll() {
 		
-		String sql = "SELECT * FROM SERVICO where isprod is null";
+		//String sql = "SELECT * FROM SERVICO where isprod = 0";
+		String sql = "SELECT * FROM SERVICO";
 		List<Servico> result = namedParameterJdbcTemplate.query(sql, new ServicoMapper());
 		return result;
 	}
@@ -55,7 +56,7 @@ public class ServicoDaoImp implements ServicoDao {
 
 	@Override
 	public List<Servico> findAllProdutos() {
-		String sql = "SELECT * FROM SERVICO WHERE isprod is NOT null";
+		String sql = "SELECT * FROM SERVICO WHERE isProd = 1";
 		List<Servico> resultado = namedParameterJdbcTemplate.query(sql, new ServicoMapper());
 		return resultado;
 	}

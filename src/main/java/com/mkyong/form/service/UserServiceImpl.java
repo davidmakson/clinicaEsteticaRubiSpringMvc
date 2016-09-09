@@ -44,4 +44,14 @@ public class UserServiceImpl implements UserService {
 		userDao.delete(id);
 	}
 
+	@Override
+	public List<User> findAllFuncionarios() {
+		return userDao.findAllFuncionarios();
+	}
+
+	@Override
+	public List<User> findAllContatos() {
+		return userDao.findAllContatos();
+	}
+
 }
