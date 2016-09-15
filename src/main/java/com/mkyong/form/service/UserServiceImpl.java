@@ -45,13 +45,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<User> findAllFuncionarios() {
-		return userDao.findAllFuncionarios();
-	}
-
-	@Override
-	public List<User> findAllContatos() {
-		return userDao.findAllContatos();
+	public List<User> findAll(int identificador) {
+		return userDao.findAll(identificador);
 	}
 
 }

@@ -16,9 +16,7 @@ public interface UserDao {
 
 	void delete(Integer id);
 
-	List<User> findAllFuncionarios();
-
-	List<User> findAllContatos();
+	List<User> findAll(int identificador);
 
 
 }

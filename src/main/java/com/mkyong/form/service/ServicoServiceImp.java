@@ -2,6 +2,7 @@ package com.mkyong.form.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.mkyong.form.dao.ServicoDao;
@@ -11,6 +12,11 @@ import com.mkyong.form.model.Servico;
 public class ServicoServiceImp implements ServicoService {
 
 	ServicoDao servicoDao;
+	
+	@Autowired
+	public void setServicoDao(ServicoDao servicoDao){
+		this.servicoDao = servicoDao;
+	}
 	
 	@Override
 	public Servico findById(Integer id) {
@@ -25,6 +31,11 @@ public class ServicoServiceImp implements ServicoService {
 	@Override
 	public List<Servico> findAllProdutos() {
 		return servicoDao.findAllProdutos();
+	}
+	
+	@Override
+	public List<Servico> findAllServicos() {
+		return servicoDao.findAllServicos();
 	}
 	
 	@Override

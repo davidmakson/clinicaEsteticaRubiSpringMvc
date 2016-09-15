@@ -15,6 +15,7 @@ import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.namedparam.SqlParameterSource;
+import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Service;
@@ -107,7 +108,7 @@ public class UserDaoImpl implements UserDao {
 
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("id", user.getId());
-		paramSource.addValue("nome", user.getName());
+		paramSource.addValue("nome", user.getNome());
 		paramSource.addValue("email", user.getEmail());
 		paramSource.addValue("address", user.getAddress());
 		paramSource.addValue("passwd", user.getPassword());
@@ -124,16 +125,17 @@ public class UserDaoImpl implements UserDao {
 
 		public User mapRow(ResultSet rs, int rowNum) throws SQLException {
 			User user = new User();
-			user.setId(rs.getInt("id"));
-			user.setName(rs.getString("nome"));
-			user.setEmail(rs.getString("email"));
-			user.setAddress(rs.getString("address"));
-			user.setPassword(rs.getString("passwd"));
-			user.setIsFunc(rs.getBoolean("isFunc"));
-			user.setSex(rs.getString("sexo"));
-			user.setPassword(rs.getString("cidade"));
-			user.setDtNasct(rs.getDate("dtNasct"));
-			user.setObs(rs.getString("obs"));
+				user.setId(rs.getInt("id"));
+				user.setNome(rs.getString("nome"));
+				user.setEmail(rs.getString("email"));
+				user.setAddress(rs.getString("address"));
+				user.setPassword(rs.getString("passwd"));
+				user.setIsFunc(rs.getBoolean("isFunc"));
+				user.setSex(rs.getString("sexo"));
+				user.setPassword(rs.getString("cidade"));
+				user.setDtNasct(rs.getDate("dtNasct"));
+				user.setObs(rs.getString("obs"));
+				
 			return user;
 		}
 	}
@@ -149,27 +151,35 @@ public class UserDaoImpl implements UserDao {
 
 	}
 
-	@Override
-	public List<User> findAllFuncionarios() {
-		//String sql = "SELECT * FROM users where isFunc = 1";
-		String sql = "SELECT * FROM users";
-		List<User> result = namedParameterJdbcTemplate.query(sql, new UserMapper());
-
-		return result;
-	}
 
 	@Override
-	public List<User> findAllContatos() {
-		//String sql = "SELECT * FROM users where isFunc = 0";
-		String sql = "SELECT * FROM users";
-		List<User> result = namedParameterJdbcTemplate.query(sql, new UserMapper());
-
-		return result;
-	}
-	public static void main(String[] args){
+	public List<User> findAll(int identificador) {
 		
+		Map<String, Object> param = new HashMap<>();
+			param.put("identificador", identificador);
+		
+		StringBuilder sql = new StringBuilder()
+		.append(" SELECT users.nome, users.id FROM")
+		.append(" users where isFunc = :identificador");
+		
+		return namedParameterJdbcTemplate.query(sql.toString(), param, getUserMapper());
 	}
+	
+	private ParameterizedRowMapper<User> getUserMapper() {
 
+		return new ParameterizedRowMapper<User>() {
+
+			@Override
+			public User mapRow(final ResultSet rs, final int rowNum) throws SQLException {
+
+				User user = new User();
+
+				user.setNome(rs.getString("nome"));
+				user.setId(rs.getInt("id"));
+				return user;
+			}
+		};
+	}
 /*	private String convertListToDelimitedString(List<String> list) {
 
 		String result = "";
@@ -179,5 +189,6 @@ public class UserDaoImpl implements UserDao {
 		return result;
 
 	}*/
+
 
 }

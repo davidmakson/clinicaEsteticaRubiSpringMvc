@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.mkyong.form.dao.AgendaDao;
 import com.mkyong.form.model.Agenda;
 
-@Service("agendaService")
+@Service("agendaServico")
 public class AgendaServicoImp implements AgendaServico{
 
 	AgendaDao agendaDAO;

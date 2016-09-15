@@ -28,6 +28,11 @@ import com.mkyong.form.validator.AgendaValidatorForm;
 @Controller
 public class AgendaController {
 
+	private static final int PRODUTO = 1;
+	private static final int SERVICO = 0;
+	private static final int FUNCIONARIO = 1;
+	private static final int CLIENTE = 0;
+	
 	private final Logger loger = LoggerFactory.getLogger(AgendaController.class);
 
 	@Autowired
@@ -46,7 +51,17 @@ public class AgendaController {
 	public void setAgendaServico(AgendaServico agendaServico) {
 		this.agendaServico = agendaServico;
 	}
+	
+	@Autowired
+	public void setUserService(UserService userService){
+		this.userService = userService;
+	}
 
+	@Autowired
+	public void setServicoService(ServicoService servicoService) {
+		this.servicoService = servicoService;
+	}
+	
 	@RequestMapping(value = "/agenda", method = RequestMethod.GET)
 	public String showAll(Model model) {
 
@@ -70,17 +85,26 @@ public class AgendaController {
 	}
 
 	private void populaCombos(Model model) {
-		model.addAttribute("contatoList", userService.findAllContatos());
-		model.addAttribute("funcionarioList", userService.findAllFuncionarios());
-		model.addAttribute("servicoList", servicoService.findAll());
+
+		Agenda agenda = new Agenda();
+		/*agenda.setFuncionarioList(userService.findAll(FUNCIONARIO));*/
+		model.addAttribute("funcionarioList", userService.findAll(FUNCIONARIO));
+		/*agenda.setContatoList(userService.findAll(CLIENTE));*/
+		model.addAttribute("contatoList", userService.findAll(CLIENTE));
+		/*agenda.setServicoList(servicoService.findAll());*/
+		model.addAttribute("servicoList", servicoService.findAll(SERVICO));
+		model.addAttribute("servicoList", servicoService.findAll(PRODUTO));
+		
+		model.addAttribute("agendaform", agenda);
+		
 	}
 
 	// save or update user
 	@RequestMapping(value = "/agenda/add", method = RequestMethod.POST)
-	public String saveOrUpdateUser(@ModelAttribute("agendaform") @Validated Agenda agenda, BindingResult result,
+	public String saveOrUpdateAgenda(@ModelAttribute("agendaform") @Validated Agenda agenda, BindingResult result,
 			Model model, final RedirectAttributes redirectAttributes) {
 
-		loger.debug("/agenda/add POST ", agenda);
+		loger.debug("saveOrUpdateAgenda() : {}", agenda);
 
 		if (result.hasErrors()) {
 

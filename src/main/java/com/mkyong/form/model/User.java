@@ -8,7 +8,7 @@ public class User {
 	Integer id;
 
 	// form:input - textbox
-	String name;
+	String nome;
 
 	// form:input - textbox
 	String email;
@@ -48,12 +48,12 @@ public class User {
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public String getNome() {
+		return nome;
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setNome(String nome) {
+		this.nome = nome;
 	}
 
 	public String getEmail() {
@@ -120,14 +120,6 @@ public class User {
 		this.cidade = cidade;
 	}
 
-	@Override
-	public String toString() {
-		return "User [id=" + id  + ", name=" + name + ", email=" + email + ", address=" + address
-				+ ", password="  + password + ", confirmPassword=" + confirmPassword
-				+ ", sex=" + sex + ", dtNasct=" + dtNasct + ", cidade=" + cidade 
-				+ ", obs=" + obs + " isNew="+ isNew() + "isFunc=" +isFunc();
-	}
-
 	public String getObs() {
 		return obs;
 	}
@@ -147,5 +139,8 @@ public class User {
 		this.dtNasct = dtNasct;
 	}
 	
-
+	@Override
+	public String toString(){
+		return this.nome;
+	}
 }

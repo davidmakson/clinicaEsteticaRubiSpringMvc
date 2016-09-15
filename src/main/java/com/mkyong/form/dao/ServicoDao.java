@@ -7,6 +7,8 @@ import com.mkyong.form.model.Servico;
 public interface ServicoDao {
 
 	List<Servico> findAll();
+	
+	List<Servico> findAll(int identificador);
 
 	void update(Servico servico);
 
@@ -17,4 +19,6 @@ public interface ServicoDao {
 	void save(Servico servico);
 
 	List<Servico> findAllProdutos();
+
+	List<Servico> findAllServicos();
 }

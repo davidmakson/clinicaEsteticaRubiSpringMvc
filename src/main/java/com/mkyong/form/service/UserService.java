@@ -14,8 +14,6 @@ public interface UserService {
 	
 	void delete(int id);
 
-	List<User> findAllFuncionarios();
-
-	List<User> findAllContatos();
+	List<User> findAll(int identificador);
 	
 }
