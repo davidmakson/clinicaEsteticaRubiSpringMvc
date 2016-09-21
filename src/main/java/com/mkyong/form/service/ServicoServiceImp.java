@@ -24,11 +24,6 @@ public class ServicoServiceImp implements ServicoService {
 	}
 
 	@Override
-	public List<Servico> findAll() {
-		return servicoDao.findAll();
-	}
-
-	@Override
 	public List<Servico> findAllProdutos() {
 		return servicoDao.findAllProdutos();
 	}
@@ -52,6 +47,11 @@ public class ServicoServiceImp implements ServicoService {
 	@Override
 	public void delete(int id) {
 		servicoDao.delete(id);
+	}
+
+	@Override
+	public List<Servico> findAll(int servico) {
+		return servicoDao.findAll(servico);
 	}
 
 }

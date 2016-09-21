@@ -37,7 +37,14 @@
 				</exclusion>
 			</exclusions>
 		</dependency>
-
+		
+		<!-- Primefaces -->
+<!-- 		<dependency>
+			<groupId>org.primefaces</groupId>
+			<artifactId>primefaces</artifactId>
+			<version>${version.primafaces}</version>
+		</dependency> -->
+		
 		<!-- Spring Web -->
 		<dependency>
 			<groupId>org.springframework</groupId>

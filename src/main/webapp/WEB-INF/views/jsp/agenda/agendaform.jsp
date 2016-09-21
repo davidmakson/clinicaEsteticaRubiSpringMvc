@@ -27,48 +27,47 @@
 		modelAttribute="agendaform" action="${agendaActionUrl}">
 
 
-		<spring:bind path="contatoList">
+		<spring:bind path="contato">
 			<div class="form-group ${status.error ? 'has-error' : ''}">
 				<label class="col-sm-2 control-label">Contato</label>
 				<div class="col-sm-10">
-					<select name="contatoList" id="contatoList" class="form-control">
+					<select name="contato" id="contato" class="form-control">
+						<option value="-1" label="Select..." />
 						<c:forEach items="${contatoList}" var="user">
-							<option value="NONE" label="Select..." />
-							<options value="${user.id}">${user.nome}</option>
+							<option value="${user.id}">${user.nome}</option>
 						</c:forEach>
 					</select>
-					<form:errors path="contatoList" class="control-label" />
 				</div>
 			</div>
 		</spring:bind>
 
-		<spring:bind path="funcionarioList">
+		<spring:bind path="funcionario">
 			<div class="form-group ${status.error ? 'has-error' : ''}">
 				<label class="col-sm-2 control-label">Funcionário</label>
 				<div class="col-sm-10">
-					<select name="funcionarioList" id="funcionarioList"
+					<select name="funcionario" id="funcionario"
 						class="form-control">
+						<option value="-1" label="Select..." />
 						<c:forEach items="${funcionarioList}" var="user">
-							<option value="NONE" label="Select..." />
-							<options value="${user.id}">${user.nome}</option>
+							<option value="${user.id}">${user.nome}</option>
 						</c:forEach>
 					</select>
-					<form:errors path="funcionarioList" class="control-label" />
+					<form:errors path="funcionario" class="control-label" />
 				</div>
 			</div>
 		</spring:bind>
 
-		<spring:bind path="servicoList">
+		<spring:bind path="servico">
 			<div class="form-group ${status.error ? 'has-error' : ''}">
 				<label class="col-sm-2 control-label">Serviço</label>
 				<div class="col-sm-10">
-					<select name="servicoList" id="servicoList" class="form-control">
+					<select name="servico" id="servico" class="form-control">
+						<option value="-1" label="Select..." />
 						<c:forEach items="${servicoList}" var="serv">
-							<option value="NONE" label="Select..." />
-							<options value="${serv.id}">${serv.nome}</option>
+							<option value="${serv.id}">${serv.nome}</option>
 						</c:forEach>
 					</select>
-					<form:errors path="servicoList" class="control-label" />
+					<form:errors path="servico" class="control-label" />
 				</div>
 			</div>
 		</spring:bind>

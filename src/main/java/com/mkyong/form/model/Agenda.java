@@ -9,38 +9,29 @@ public class Agenda {
 	Integer id;
 	Integer contato;
 	Integer funcionario;
+	
+	public Agenda() {
+	}
+
+	public Agenda(Integer id, Integer contato, Integer funcionario, Integer servico, String dtAgenda, String horaAgenda,
+			String obs, List<User> contatoList, List<User> funcionarioList, List<Servico> servicoList) {
+		super();
+		this.id = id;
+		this.contato = contato;
+		this.funcionario = funcionario;
+		this.servico = servico;
+		this.dtAgenda = dtAgenda;
+		this.horaAgenda = horaAgenda;
+		this.obs = obs;
+	}
+
 	Integer servico;
 	String dtAgenda;
 	String horaAgenda;
 	String obs;
 	
-	List<User> contatoList = new ArrayList<>();
-	List<User> funcionarioList = new ArrayList<>();
-	List<Servico> servicoList = new ArrayList<>();
-	
-	public List<User> getContatoList() {
-		return contatoList;
-	}
 
-	public void setContatoList(List<User> contatoList) {
-		this.contatoList = contatoList;
-	}
-
-	public List<User> getFuncionarioList() {
-		return funcionarioList;
-	}
-
-	public void setFuncionarioList(List<User> funcionarioList) {
-		this.funcionarioList = funcionarioList;
-	}
 	
-	public List<Servico> getServicoList() {
-		return servicoList;
-	}
-	
-	public void setServicoList(List<Servico> servicoList) {
-		this.servicoList = servicoList;
-	}
 	
 	public String getHoraAgenda() {
 		return horaAgenda;
@@ -116,13 +107,13 @@ public class Agenda {
 		return(this.id == null);
 	}
 	
-	@Override
+/*	@Override
 	public String toString(){
 		return "User [id="+ id + ", contato="+ contato
 				+ ", funcionario=" + funcionario + ", servico= " + servico
 				+ ", obs=" + obs + ", dtAgenda=" + dtAgenda
 				+ ", horaAgenda=" + horaAgenda + "]" + isNew();
-	}
+	}*/
 	
 	public String getDtAgenda() {
 		return dtAgenda;

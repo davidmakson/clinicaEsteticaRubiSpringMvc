@@ -1,6 +1,8 @@
 package com.mkyong.form.web;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -26,7 +28,7 @@ import com.mkyong.form.service.UserService;
 import com.mkyong.form.validator.AgendaValidatorForm;
 
 @Controller
-public class AgendaController {
+public class AgendaController{
 
 	private static final int PRODUTO = 1;
 	private static final int SERVICO = 0;
@@ -87,15 +89,16 @@ public class AgendaController {
 	private void populaCombos(Model model) {
 
 		Agenda agenda = new Agenda();
-		/*agenda.setFuncionarioList(userService.findAll(FUNCIONARIO));*/
-		model.addAttribute("funcionarioList", userService.findAll(FUNCIONARIO));
-		/*agenda.setContatoList(userService.findAll(CLIENTE));*/
-		model.addAttribute("contatoList", userService.findAll(CLIENTE));
-		/*agenda.setServicoList(servicoService.findAll());*/
-		model.addAttribute("servicoList", servicoService.findAll(SERVICO));
-		model.addAttribute("servicoList", servicoService.findAll(PRODUTO));
+		List<User> contatoList = userService.findAll(CLIENTE);
+		List<User> funcionarioList = userService.findAll(FUNCIONARIO);
+		List<Servico> servicoList = servicoService.findAll(SERVICO);
+		
+		//model.addAttribute("servicoList", servicoService.findAll(PRODUTO));
 		
 		model.addAttribute("agendaform", agenda);
+		model.addAttribute("funcionarioList",funcionarioList);
+		model.addAttribute("contatoList", contatoList);
+		model.addAttribute("servicoList", servicoList);
 		
 	}
 
@@ -104,7 +107,7 @@ public class AgendaController {
 	public String saveOrUpdateAgenda(@ModelAttribute("agendaform") @Validated Agenda agenda, BindingResult result,
 			Model model, final RedirectAttributes redirectAttributes) {
 
-		loger.debug("saveOrUpdateAgenda() : {}", agenda);
+		loger.debug("saveOrUpdateAgenda() : {}", agenda.toString());
 
 		if (result.hasErrors()) {
 
@@ -119,7 +122,11 @@ public class AgendaController {
 			} else {
 				redirectAttributes.addFlashAttribute("msg", "Agenda atualizada com sucesso!");
 			}
-
+			//from 28/12/1988 to 1998-10-25
+			Date myDate = new Date();
+			
+			agenda.setDtAgenda(new SimpleDateFormat("yyyy-MM-dd").format(myDate));
+			
 			agendaServico.saveOrUpdate(agenda);
 
 			// POST/REDIRECT/GET

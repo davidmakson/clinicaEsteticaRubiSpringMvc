@@ -24,19 +24,11 @@ public class AgendaValidatorForm implements Validator{
 
 	@Override
 	public void validate(Object target, Errors errors) {
-		User user = new User();
-		Servico serv = new Servico();
 		
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "dtAgenda", "required.dtAgenda");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "horaAgenda", "required.horaAgenda");
 		ValidationUtils.rejectIfEmptyOrWhitespace(errors, "obs", "required.obs");
 		
-		if("NONE".equals(user.getNome())){
-			errors.rejectValue("contatoList", "reject.contatoList");
-		}
-		if("NONE".equals(serv.getNome())){
-			errors.rejectValue("servicoList", "reject.servicoList");
-		}
 	}
 
 }
