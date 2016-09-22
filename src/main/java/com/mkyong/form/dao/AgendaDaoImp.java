@@ -33,8 +33,7 @@ public class AgendaDaoImp implements AgendaDao{
 		
 		String sql = "SELECT * FROM AGENDA";
 		
-		List<Agenda> result = namedParameterJdbcTemplate.query(sql, new AgendaMaper());
-		return result;
+		return namedParameterJdbcTemplate.query(sql, new AgendaMaper());
 	}
 
 	@Override
@@ -126,5 +125,22 @@ public class AgendaDaoImp implements AgendaDao{
 			return agenda;
 		}
 		
+	}
+
+	@Override
+	public List<Agenda> validaAgenda(String data, String hora, int funcionario) {
+		
+		Map<String, Object> paramMap = new HashMap<>();
+		paramMap.put("data", data);
+		paramMap.put("hora", hora);
+		paramMap.put("funcionario", funcionario);
+		
+		StringBuilder sql = new StringBuilder()
+		.append("SELECT * FROM AGENDA ")
+		.append("WHERE dt_agenda = :data ")
+		.append("AND hora_agenda = :hora ")
+		.append("AND id_funcionario = :funcionario");
+		
+		return namedParameterJdbcTemplate.query(sql.toString(), paramMap, new AgendaMaper());
 	}
 }

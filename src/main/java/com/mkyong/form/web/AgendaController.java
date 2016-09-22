@@ -1,8 +1,10 @@
 package com.mkyong.form.web;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -16,8 +18,11 @@ import org.springframework.web.bind.WebDataBinder;
 import org.springframework.web.bind.annotation.InitBinder;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.method.annotation.RequestParamMethodArgumentResolver;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.mkyong.form.model.Agenda;
 import com.mkyong.form.model.Servico;
@@ -34,6 +39,9 @@ public class AgendaController{
 	private static final int SERVICO = 0;
 	private static final int FUNCIONARIO = 1;
 	private static final int CLIENTE = 0;
+	
+	private static final String APPLICATION_JSON = "application/json";
+	private static final String GET = "";
 	
 	private final Logger loger = LoggerFactory.getLogger(AgendaController.class);
 
@@ -115,17 +123,14 @@ public class AgendaController{
 			return "/agenda/agendaform";
 
 		} else {
-
-			redirectAttributes.addFlashAttribute("css", "success");
+			
+			formataData(agenda);
+			
 			if (agenda.isNew()) {
 				redirectAttributes.addFlashAttribute("msg", "Agenda adicionada com sucesso!");
 			} else {
 				redirectAttributes.addFlashAttribute("msg", "Agenda atualizada com sucesso!");
 			}
-			//from 28/12/1988 to 1998-10-25
-			Date myDate = new Date();
-			
-			agenda.setDtAgenda(new SimpleDateFormat("yyyy-MM-dd").format(myDate));
 			
 			agendaServico.saveOrUpdate(agenda);
 
@@ -133,6 +138,56 @@ public class AgendaController{
 			return "redirect:/agenda/" + agenda.getId();
 		}
 
+	}
+
+	private void formataData(Agenda agenda) {
+		
+		//from 28/12/1988 to 1998-10-25
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat sdfDtAgenda = new SimpleDateFormat("yyyy-MM-dd");
+		
+		Date myDate = null;
+		
+		try {
+			//parser = String to Date
+			myDate = sdf.parse(agenda.getDtAgenda());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//formater = Date to String
+		String dtAgenda = sdfDtAgenda.format(myDate);
+		
+		agenda.setDtAgenda(dtAgenda);
+		
+	}
+	//enviando no parametro da URL
+	@ResponseBody
+	@RequestMapping(value = "/menudinamico/{cnpj}", method = RequestMethod.GET, produces = APPLICATION_JSON)
+	public boolean validaAgenda(@PathVariable final String cnpj) {
+		return true;
+	}
+	
+	//enviando no corpo do ajax json
+	@ResponseBody
+	@RequestMapping(value = "/agenda/validaAgenda",
+	    method = {RequestMethod.GET,RequestMethod.POST},
+		consumes = APPLICATION_JSON,
+	    produces = APPLICATION_JSON)
+	public boolean validaAgenda(@RequestBody Agenda agenda) {
+	    
+		System.out.println("CNPJ recebido: " + agenda.getDtAgenda());
+		
+		boolean agendado = false;
+		
+		List<Agenda> result = agendaServico.validaAgenda(agenda.getDtAgenda(),agenda.getHoraAgenda(),agenda.getFuncionario());
+		
+		if(result.isEmpty()){
+			agendado = false;
+		}else{
+			agendado = true;
+		}
+		return agendado;
 	}
 
 	// show agendaForm

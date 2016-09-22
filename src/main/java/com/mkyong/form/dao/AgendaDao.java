@@ -16,4 +16,5 @@ public interface AgendaDao {
 
 	void save(Agenda agenda);
 
+	List<Agenda> validaAgenda(String data, String hora, int funcionario);
 }

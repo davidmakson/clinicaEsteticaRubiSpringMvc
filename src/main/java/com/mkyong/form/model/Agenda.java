@@ -107,13 +107,13 @@ public class Agenda {
 		return(this.id == null);
 	}
 	
-/*	@Override
+	@Override
 	public String toString(){
 		return "User [id="+ id + ", contato="+ contato
 				+ ", funcionario=" + funcionario + ", servico= " + servico
 				+ ", obs=" + obs + ", dtAgenda=" + dtAgenda
 				+ ", horaAgenda=" + horaAgenda + "]" + isNew();
-	}*/
+	}
 	
 	public String getDtAgenda() {
 		return dtAgenda;

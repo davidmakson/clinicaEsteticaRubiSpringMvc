@@ -42,4 +42,9 @@ public class AgendaServicoImp implements AgendaServico{
 		 agendaDAO.delete(id);
 	}
 
+	@Override
+	public List<Agenda> validaAgenda(String dtAgenda, String horaAgenda, Integer funcionario) {
+		return agendaDAO.validaAgenda(dtAgenda, horaAgenda, funcionario);
+	}
+
 }

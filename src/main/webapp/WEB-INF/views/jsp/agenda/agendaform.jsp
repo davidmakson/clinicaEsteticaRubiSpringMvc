@@ -24,7 +24,7 @@
 	<spring:url value="/agenda/add" var="agendaActionUrl" />
 
 	<form:form class="form-horizontal" method="post"
-		modelAttribute="agendaform" action="${agendaActionUrl}">
+		modelAttribute="agendaform" action="${agendaActionUrl}" onsubmit="return confirm('Tem certeza que deseija salvar?') ? true : false;">
 
 
 		<spring:bind path="contato">
@@ -61,7 +61,8 @@
 			<div class="form-group ${status.error ? 'has-error' : ''}">
 				<label class="col-sm-2 control-label">Serviço</label>
 				<div class="col-sm-10">
-					<select name="servico" id="servico" class="form-control">
+					<select name="servico" id="servico" 
+						class="form-control">
 						<option value="-1" label="Select..." />
 						<c:forEach items="${servicoList}" var="serv">
 							<option value="${serv.id}">${serv.nome}</option>
@@ -87,8 +88,8 @@
 			<div class="form-group ${status.error ? 'has-error' : ''}">
 				<label class="col-sm-2 control-label">Hora</label>
 				<div class="col-sm-10">
-					<form:input path="horaAgenda" class="form-control" id="horaAgenda"
-						placeholder="horaAgenda" />
+					<form:input path="horaAgenda" class="form-control" 
+						id="horaAgenda" placeholder="horaAgenda" />
 					<form:errors path="horaAgenda" class="control-label" />
 				</div>
 			</div>
@@ -109,10 +110,10 @@
 			<div class="col-sm-offset-2 col-sm-10">
 				<c:choose>
 					<c:when test="${agendaform['new']}">
-						<button type="submit" class="btn-lg btn-primary pull-right">Adicionar</button>
+						<button id="btn-adiciona" type="submit" class="btn-lg btn-primary pull-right">Adicionar</button>
 					</c:when>
 					<c:otherwise>
-						<button type="submit" class="btn-lg btn-primary pull-right">Atualizar</button>
+						<button id="btn-atualiza" type="submit" class="btn-lg btn-primary pull-right">Atualizar</button>
 					</c:otherwise>
 				</c:choose>
 			</div>
@@ -122,6 +123,66 @@
 </div>
 
 <jsp:include page="../fragments/footer.jsp" />
+
+<script>
+	jQuery(document).read(function($)){
+	
+		$("#btn-adiciona").submit(function(event)){
+			
+			// Disble the search button
+			enableBtn(false);
+			
+			// Prevent the form from submitting via the browser.
+			event.preventDefault();
+			
+			validaAgendaAjax();
+		});
+	});
+	
+	function enableBtn(flag){
+		if(${agendaform['new']}){
+			$("#btn-adiciona").prop("disabled",flag);
+		}else{
+			$("#btn-atualiza").prop("disabled",flag);
+		}
+	}
+	
+	function validaAgendaAjax(){
+		
+		var parametros = {}
+		parametros["data"] = $("#dtAgenda").val();
+		parametros["hora"] = $("#horaAgenda").val();
+		parametros["funcionario"] = $("#funcionario").val();
+		
+		$.ajax({
+		
+			type : "POST",
+			contentType : "application/json",
+			url : "/agenda/validaAgenda",
+			data : JSON.stringify(parametros),
+			dataType : 'json',
+			timeout : 100000,
+			sucess : function(data){
+				console.log("SUCESS: ", data);
+				display(data);
+			},
+			error : function(e){
+				console.log("ERROR: ", e);
+			},
+			done : function(e){
+				console.log("ERROR: ", e)
+				enableBtn(true);
+			}
+		});
+	}
+	
+	function display(data) {
+		var json = "<h4>Ajax Response</h4><pre>"
+				+ JSON.stringify(data, null, 4) + "</pre>";
+		$('#feedback').html(json);
+	}
+	
+</script>
 
 </body>
 </html>

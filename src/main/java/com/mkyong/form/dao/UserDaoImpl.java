@@ -45,13 +45,9 @@ public class UserDaoImpl implements UserDao {
 		try {
 			result = namedParameterJdbcTemplate.queryForObject(sql, params, new UserMapper());
 		} catch (EmptyResultDataAccessException e) {
-			// do nothing, return null
+			System.out.println("UserDaoImpl - findById - ");
+			e.printStackTrace();
 		}
-
-		/*
-		 * User result = namedParameterJdbcTemplate.queryForObject( sql, params,
-		 * new BeanPropertyRowMapper<User>());
-		 */
 
 		return result;
 

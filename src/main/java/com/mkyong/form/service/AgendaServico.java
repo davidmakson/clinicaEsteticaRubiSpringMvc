@@ -14,4 +14,6 @@ public interface AgendaServico {
 	
 	void delete(Integer id);
 
+	List<Agenda> validaAgenda(String dtAgenda, String horaAgenda, Integer funcionario);
+
 }
