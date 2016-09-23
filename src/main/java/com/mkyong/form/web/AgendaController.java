@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.method.annotation.RequestParamMethodArgumentResolver;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -161,6 +162,18 @@ public class AgendaController{
 		agenda.setDtAgenda(dtAgenda);
 		
 	}
+	//para testar..
+    @RequestMapping(value = "action/faz-alguma-coisa", method=RequestMethod.GET)
+    public 		@ResponseBody Object retornaAlgo(Model model, 
+                @ModelAttribute("usuarioLogado") User user,
+                Agenda agenda, @RequestParam Long parametro){
+    	
+    	Object object = null;
+    	model.addAttribute("agenda", agenda);
+    	
+        return object;      
+    }
+    
 	//enviando no parametro da URL
 	@ResponseBody
 	@RequestMapping(value = "/menudinamico/{cnpj}", method = RequestMethod.GET, produces = APPLICATION_JSON)
@@ -176,7 +189,7 @@ public class AgendaController{
 	    produces = APPLICATION_JSON)
 	public boolean validaAgenda(@RequestBody Agenda agenda) {
 	    
-		System.out.println("CNPJ recebido: " + agenda.getDtAgenda());
+		System.out.println("Já existe agenda no dia: " + agenda.getDtAgenda());
 		
 		boolean agendado = false;
 		

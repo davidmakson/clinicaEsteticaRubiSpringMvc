@@ -4,6 +4,10 @@
 <%@ taglib prefix="form" uri="http://www.springframework.org/tags/form"%>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 
+<spring:url value="/resources/core/js/jquery.1.10.2.min.js"	var="jqueryJs" />
+
+<script src="${jqueryJs}"></script>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -106,6 +110,8 @@
 			</div>
 		</spring:bind>
 
+		<div id="feedback"></div>
+
 		<div class="form-group">
 			<div class="col-sm-offset-2 col-sm-10">
 				<c:choose>
@@ -126,18 +132,27 @@
 
 <script>
 	jQuery(document).read(function($)){
-	
-		$("#btn-adiciona").submit(function(event)){
-			
-			// Disble the search button
+		
+		//submit
+		//$("#btn-adiciona").submit(function(event)){
+		//change
+		$("#obs").change(function()){
+			alert('adiciona');
 			enableBtn(false);
-			
-			// Prevent the form from submitting via the browser.
-			event.preventDefault();
-			
+			//event.preventDefault();
 			validaAgendaAjax();
 		});
 	});
+	
+/* 	$('#razao-social').change(function() {
+	    $.get("action/fazalgumaCoisa", {parametro: $(this).val()}, 
+	    	function(data) {
+	        //Criar a montagem da tela com o jQuery
+	    	}).fail(function() {
+	        alert("Ocorreu um erro, tente novamente mais tarde.");
+	    });
+	}); */
+	
 	
 	function enableBtn(flag){
 		if(${agendaform['new']}){
