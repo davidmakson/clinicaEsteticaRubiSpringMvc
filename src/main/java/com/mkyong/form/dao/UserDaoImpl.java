@@ -68,9 +68,9 @@ public class UserDaoImpl implements UserDao {
 
 		KeyHolder keyHolder = new GeneratedKeyHolder();
 		
-		String sql = "INSERT INTO USERS (nome, email, address, passwd,"
+		String sql = "INSERT INTO USERS (nome, email, telefone, celular, address, passwd,"
 					+"isFunc, sexo, cidade, dtNasct, obs) "
-					+"VALUES ( :nome, :email, :address, :passwd, "
+					+"VALUES ( :nome, :email, :telefone, :celular, :address, :passwd, "
 					+":isFunc,:sexo, :cidade, :dtNasct, :obs)";
 
 		namedParameterJdbcTemplate.update(sql, getSqlParameterByModel(user), keyHolder);
@@ -81,7 +81,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public void update(User user) {
 
-		String sql = "UPDATE USERS SET nome=:nome, email=:email, address=:address, " 
+		String sql = "UPDATE USERS SET nome=:nome, email=:email, telefone=:telefone, celular=:celular, address=:address, " 
 					+"passwd=:passwd, isFunc=:isFunc, sexo=:sexo, "
 					+"cidade=:cidade, dtNasct=:dtNasct, obs=:obs WHERE id=:id";
 
@@ -106,6 +106,8 @@ public class UserDaoImpl implements UserDao {
 		paramSource.addValue("id", user.getId());
 		paramSource.addValue("nome", user.getNome());
 		paramSource.addValue("email", user.getEmail());
+		paramSource.addValue("telefone", user.getTelefone());
+		paramSource.addValue("celular", user.getCelular());
 		paramSource.addValue("address", user.getAddress());
 		paramSource.addValue("passwd", user.getPassword());
 		paramSource.addValue("isFunc", user.isFunc());
@@ -124,6 +126,8 @@ public class UserDaoImpl implements UserDao {
 				user.setId(rs.getInt("id"));
 				user.setNome(rs.getString("nome"));
 				user.setEmail(rs.getString("email"));
+				user.setTelefone(rs.getString("telefone"));
+				user.setCelular(rs.getString("celular"));
 				user.setAddress(rs.getString("address"));
 				user.setPassword(rs.getString("passwd"));
 				user.setIsFunc(rs.getBoolean("isFunc"));

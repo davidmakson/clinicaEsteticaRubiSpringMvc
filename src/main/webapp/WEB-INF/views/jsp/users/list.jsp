@@ -27,7 +27,11 @@
 			<thead>
 				<tr>
 					<th>#ID</th>
-					<th>Name</th>
+					<th>Nome</th>
+					<th>Telefone</th>
+					<c:if test="${not null user.celular}">
+						<th>celular</th>
+					</c:if>
 					<th>Email</th>
 				</tr>
 			</thead>
@@ -35,7 +39,8 @@
 			<c:forEach var="user" items="${users}">
 				<tr>
 					<td>${user.id}</td>
-					<td>${user.name}</td>
+					<td>${user.nome}</td>
+					<td>${user.te }
 					<td>${user.email}</td>
 					<%-- <td>
 						<c:forEach var="framework" items="${user.framework}" varStatus="loop">

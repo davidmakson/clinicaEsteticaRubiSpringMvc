@@ -45,6 +45,26 @@
 			</div>
 		</spring:bind>
 
+		<spring:bind path="telefone">
+			<div class="form-group ${status.error ? 'has-error' : ''} }">
+				<label class="col-sm-2 control-label">Telefone</label>
+				<div>
+					<form:input path="telfone" type="text" class="form-control" id="telfone" placeholder="Telefone"/>
+					<form:errors path="telefone" class="control-label" />
+				</div>
+			</div>
+		</spring:bind>
+		
+		<spring:bind path="celular">
+			<div class="form-group ${status.error ? 'has-error' : ''} }">
+				<label class="col-sm-2 control-label">Celular</label>
+				<div>
+					<form:input path="celular" type="text" class="form-control" id="celular" placeholder="Celular"/>
+					<form:errors path="celular" class="control-label" />
+				</div>
+			</div>
+		</spring:bind>
+		
 		<spring:bind path="email">
 			<div class="form-group ${status.error ? 'has-error' : ''}">
 				<label class="col-sm-2 control-label">Email</label>

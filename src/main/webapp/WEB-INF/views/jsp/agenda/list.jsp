@@ -26,7 +26,7 @@
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>#ID</th>
+					<th>Codigo</th>
 					<th>Cliente</th>
 					<th>Funcionario</th>
 					<th>Serviço</th>
@@ -46,13 +46,13 @@
 					<td>${agenda.horaAgenda}"</td>
 					<td>${agenda.obs}"</td>
 					<td>
-						<spring:url value="/users/${agenda.id}" var="userUrl" />
-						<spring:url value="/users/${agenda.id}/delete" var="deleteUrl" /> 
-						<spring:url value="/users/${agenda.id}/update" var="updateUrl" />
+						<spring:url value="/agenda/${agenda.id}" var="agendaUrl" />
+						<spring:url value="/agenda/${agenda.id}/delete" var="deleteUrl" /> 
+						<spring:url value="/agenda/${agenda.id}/update" var="updateUrl" />
 
-						<button class="btn btn-info" onclick="location.href='${agendaUrl}'">Query</button>
-						<button class="btn btn-primary" onclick="location.href='${updateUrl}'">Update</button>
-						<button class="btn btn-danger" onclick="this.disabled=true;post('${deleteUrl}')">Delete</button></td>
+						<button class="btn btn-info" onclick="location.href='${agendaUrl}'">Informação</button>
+						<button class="btn btn-primary" onclick="location.href='${updateUrl}'">Atualizar</button>
+						<button class="btn btn-danger" onclick="this.disabled=true;post('${deleteUrl}')">Deletar</button></td>
 				</tr>
 			</c:forEach>
 		</table>

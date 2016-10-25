@@ -13,8 +13,34 @@ public class User {
 	// form:input - textbox
 	String email;
 
-	// form:textarea - textarea
+	// form:input - textbox
 	String address;
+	
+	// form:input - textbox
+	String telefone;
+	
+	//form:input - textbox
+	String celular;
+	
+	public String getTelefone() {
+		return telefone;
+	}
+	
+
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+	
+
+	public String getCelular() {
+		return celular;
+	}
+	
+
+	public void setCelular(String celular) {
+		this.celular = celular;
+	}
+	
 
 	// form:input - password
 	String password;
