@@ -26,12 +26,12 @@
 		<table class="table table-striped">
 			<thead>
 				<tr>
-					<th>#ID</th>
+					<th>Codigo</th>
 					<th>Nome</th>
 					<th>Telefone</th>
-					<c:if test="${not null user.celular}">
-						<th>celular</th>
-					</c:if>
+					<%--<c:if test="${not null user.celular}"> --%>
+					<th>celular</th>
+					<%--</c:if> --%>
 					<th>Email</th>
 				</tr>
 			</thead>
@@ -40,7 +40,8 @@
 				<tr>
 					<td>${user.id}</td>
 					<td>${user.nome}</td>
-					<td>${user.te }
+					<td>${user.telefone }
+					<td>${user.celular }
 					<td>${user.email}</td>
 					<%-- <td>
 						<c:forEach var="framework" items="${user.framework}" varStatus="loop">
@@ -52,9 +53,9 @@
 						<spring:url value="/users/${user.id}/delete" var="deleteUrl" /> 
 						<spring:url value="/users/${user.id}/update" var="updateUrl" />
 
-						<button class="btn btn-info" onclick="location.href='${userUrl}'">Query</button>
-						<button class="btn btn-primary" onclick="location.href='${updateUrl}'">Update</button>
-						<button class="btn btn-danger" onclick="this.disabled=true;post('${deleteUrl}')">Delete</button>
+						<button class="btn btn-info" onclick="location.href='${userUrl}'">Detalhes</button>
+						<button class="btn btn-primary" onclick="location.href='${updateUrl}'">Atualizar</button>
+						<button class="btn btn-danger" onclick="this.disabled=true;post('${deleteUrl}')">Deletar</button>
 					</td>
 				</tr>
 			</c:forEach>

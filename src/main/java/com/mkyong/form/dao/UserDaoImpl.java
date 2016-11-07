@@ -110,7 +110,7 @@ public class UserDaoImpl implements UserDao {
 		paramSource.addValue("celular", user.getCelular());
 		paramSource.addValue("address", user.getAddress());
 		paramSource.addValue("passwd", user.getPassword());
-		paramSource.addValue("isFunc", user.isFunc());
+		paramSource.addValue("isFunc", user.getIsFunc());
 		paramSource.addValue("sexo", user.getSex());
 		paramSource.addValue("cidade", user.getCidade());
 		paramSource.addValue("dtNasct", user.getDtNasct());

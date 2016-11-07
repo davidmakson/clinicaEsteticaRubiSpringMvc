@@ -22,26 +22,6 @@ public class User {
 	//form:input - textbox
 	String celular;
 	
-	public String getTelefone() {
-		return telefone;
-	}
-	
-
-	public void setTelefone(String telefone) {
-		this.telefone = telefone;
-	}
-	
-
-	public String getCelular() {
-		return celular;
-	}
-	
-
-	public void setCelular(String celular) {
-		this.celular = celular;
-	}
-	
-
 	// form:input - password
 	String password;
 
@@ -61,7 +41,25 @@ public class User {
 	Date dtNasct;
 	
 	String obs;
+	public String getTelefone() {
+		return telefone;
+	}
+	
 
+	public void setTelefone(String telefone) {
+		this.telefone = telefone;
+	}
+	
+
+	public String getCelular() {
+		return celular;
+	}
+	
+
+	public void setCelular(String celular) {
+		this.celular = celular;
+	}
+	
 	public boolean isNew() {
 		return (this.id == null);
 	}
@@ -114,7 +112,7 @@ public class User {
 		this.confirmPassword = confirmPassword;
 	}
 
-	public boolean isFunc() {
+	public boolean getIsFunc() {
 		return isFunc;
 	}
 
@@ -154,12 +152,6 @@ public class User {
 	public void setObs(String obs) {
 		this.obs = obs;
 	}
-	
-
-	public void setFunc(boolean isFunc) {
-		this.isFunc = isFunc;
-	}
-	
 
 	public void setDtNasct(Date dtNasct) {
 		this.dtNasct = dtNasct;

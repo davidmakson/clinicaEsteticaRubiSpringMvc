@@ -109,19 +109,10 @@ public class UserController {
 
 		User user = new User();
 
-		// set default value
-/*		user.setNome("mkyong123");
-		user.setEmail("test@gmail.com");
-		user.setAddress("abc 88");
-		//user.setPassword("123");
-		//user.setConfirmPassword("123");
-		user.setSex("M");
-		user.setCidade("SG");*/
-
 		model.addAttribute("userForm", user);
 
 		populateDefaultModel(model);
-
+		
 		return "users/userform";
 
 	}

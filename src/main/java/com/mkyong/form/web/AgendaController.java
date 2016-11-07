@@ -216,17 +216,17 @@ public class AgendaController{
 	}
 
 	// show agenda form to update
-	@RequestMapping(value = "agenda/{id}/update", method = RequestMethod.POST)
+	@RequestMapping(value = "agenda/{id}/update", method = RequestMethod.GET)
 	public String updateAgenda(@PathVariable("id") int id, Model model) {
 
 		Agenda agenda = agendaServico.findById(id);
 		model.addAttribute("agendaForm", agenda);
 
-		return "agenda/userform";
+		return "redirect:agenda/agendaform";
 	}
 
 	// deletar agenda
-	@RequestMapping(value = "agenda/{id}/deletar", method = RequestMethod.POST)
+	@RequestMapping(value = "agenda/{id}/delete", method = RequestMethod.GET)
 	public String deletaAgenda(@PathVariable("id") Integer id, Model model) {
 
 		agendaServico.delete(id);

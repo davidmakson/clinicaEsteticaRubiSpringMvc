@@ -13,10 +13,10 @@
 
 	<c:choose>
 		<c:when test="${userForm['new']}">
-			<h1>Add User</h1>
+			<h1>Adicionar Cliente</h1>
 		</c:when>
 		<c:otherwise>
-			<h1>Update User</h1>
+			<h1>Atualizar Cliente</h1>
 		</c:otherwise>
 	</c:choose>
 	<br />
@@ -28,19 +28,21 @@
 		<form:hidden path="id" />
 
 		<spring:bind path="isFunc">
+			<div class="form-group ${status.error ? 'has-error' : ''} }">
 				<label class="col-sm-2 control-label">Funcionário</label>
 				<div class="col-sm-10">
-					<form:checkbox path="isFunc" class="form-control " id="isFunc"  />
+					<form:checkbox path="isFunc" class="checkbox-inline " id="isFunc"  />
 					<form:errors path="isFunc" class="control-label" />
 				</div>
+			</div>
 		</spring:bind>
 		
-		<spring:bind path="name">
+		<spring:bind path="nome">
 			<div class="form-group ${status.error ? 'has-error' : ''}">
 				<label class="col-sm-2 control-label">Nome</label>
 				<div class="col-sm-10">
-					<form:input path="name" type="text" class="form-control " id="name" placeholder="Nome" />
-					<form:errors path="name" class="control-label" />
+					<form:input path="nome" type="text" class="form-control " id="nome" placeholder="Nome" />
+					<form:errors path="nome" class="control-label" />
 				</div>
 			</div>
 		</spring:bind>
@@ -48,8 +50,8 @@
 		<spring:bind path="telefone">
 			<div class="form-group ${status.error ? 'has-error' : ''} }">
 				<label class="col-sm-2 control-label">Telefone</label>
-				<div>
-					<form:input path="telfone" type="text" class="form-control" id="telfone" placeholder="Telefone"/>
+				<div class="col-sm-10">
+					<form:input path="telefone" type="text" class="form-control" id="telefone" placeholder="Telefone"/>
 					<form:errors path="telefone" class="control-label" />
 				</div>
 			</div>
@@ -58,7 +60,7 @@
 		<spring:bind path="celular">
 			<div class="form-group ${status.error ? 'has-error' : ''} }">
 				<label class="col-sm-2 control-label">Celular</label>
-				<div>
+				<div class="col-sm-10">
 					<form:input path="celular" type="text" class="form-control" id="celular" placeholder="Celular"/>
 					<form:errors path="celular" class="control-label" />
 				</div>
@@ -108,14 +110,12 @@
 		<spring:bind path="cidade">
 			<div class="form-group ${status.error ? 'has-error' : ''}">
 				<label class="col-sm-2 control-label">Cidade</label>
-				<div class="col-sm-5">
-					<div class="col-sm-10">
-						<form:select path="country" class="form-control">
+				<div class="col-sm-10">
+					<form:select path="cidade" class="form-control">
 						<form:option value="NONE" label="--- Select ---" />
 						<form:options items="${countryList}" />
 					</form:select>
-					<form:errors path="country" class="control-label" />
-					</div>
+					<form:errors path="cidade" class="control-label" />
 				</div>
 			</div>
 		</spring:bind>
@@ -134,8 +134,10 @@
 			<div class="form-group ${status.error ? 'has-error' : ''}">
 				<label class="col-sm-2 control-label">Sexo</label>
 				<div class="col-sm-10">
-					<label class="radio-inline"> <form:radiobutton path="sex" value="M" />Homem</label> 
-					<label class="radio-inline"> <form:radiobutton path="sex" value="F" /> Mulher</label> 
+					<label class="radio-inline"> 
+					<form:radiobutton path="sex" value="M" />Homem</label> 
+					<label class="radio-inline"> 
+					<form:radiobutton path="sex" value="F" /> Mulher</label> 
 					<br />
 					<form:errors path="sex" class="control-label" />
 				</div>

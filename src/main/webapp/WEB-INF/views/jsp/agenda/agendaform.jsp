@@ -27,10 +27,9 @@
 
 	<spring:url value="/agenda/add" var="agendaActionUrl" />
 
-	<form:form class="form-horizontal" method="post"
-		modelAttribute="agendaform" action="${agendaActionUrl}" 
+	<form:form class="form-horizontal" method="post" modelAttribute="agendaform" action="${agendaActionUrl}" >
 		<%-- onsubmit="return confirm('Tem certeza que deseija salvar?') ? true : false;" --%>
-		>
+		
 
 
 		<spring:bind path="contato">

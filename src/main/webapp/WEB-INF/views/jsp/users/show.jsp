@@ -20,7 +20,7 @@
 		</div>
 	</c:if>
 
-	<h1>User Detail</h1>
+	<h1>Detalhes do Cliente</h1>
 	<br />
 
 	<div class="row">
@@ -29,8 +29,18 @@
 	</div>
 
 	<div class="row">
-		<label class="col-sm-2">Name</label>
-		<div class="col-sm-10">${user.name}</div>
+		<label class="col-sm-2">Nome</label>
+		<div class="col-sm-10">${user.nome}</div>
+	</div>
+
+	<div class="row">
+		<label class="col-sm-2">Celular</label>
+		<div class="col-sm-10">${user.celular}</div>
+	</div>
+	
+		<div class="row">
+		<label class="col-sm-2">Telefone</label>
+		<div class="col-sm-10">${user.telefone}</div>
 	</div>
 
 	<div class="row">
