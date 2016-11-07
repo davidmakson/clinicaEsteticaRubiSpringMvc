@@ -109,7 +109,7 @@ public class Agenda {
 	
 	@Override
 	public String toString(){
-		return "User [id="+ id + ", contato="+ contato
+		return "Agenda [id="+ id + ", contato="+ contato
 				+ ", funcionario=" + funcionario + ", servico= " + servico
 				+ ", obs=" + obs + ", dtAgenda=" + dtAgenda
 				+ ", horaAgenda=" + horaAgenda + "]" + isNew();

@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.ResultSetExtractor;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.RowMapperResultSetExtractor;
@@ -14,7 +15,9 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.core.simple.ParameterizedRowMapper;
 import org.springframework.stereotype.Service;
 
+import com.mkyong.form.dao.UserDaoImpl.UserMapper;
 import com.mkyong.form.model.Servico;
+import com.mkyong.form.model.User;
 
 import ch.qos.logback.core.Appender;
 
@@ -44,8 +47,21 @@ public class ServicoDaoImp implements ServicoDao {
 
 	@Override
 	public Servico findById(Integer id) {
-		// TODO Auto-generated method stub
-		return null;
+		
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("id", id);
+
+		String sql = "SELECT * FROM users WHERE id=:id";
+
+		Servico result = null;
+		try {
+			result = namedParameterJdbcTemplate.queryForObject(sql, params, new ServicoMapper());
+		} catch (EmptyResultDataAccessException e) {
+			System.out.println("UserDaoImpl - findById - ");
+			e.printStackTrace();
+		}
+
+		return result;
 	}
 
 	@Override

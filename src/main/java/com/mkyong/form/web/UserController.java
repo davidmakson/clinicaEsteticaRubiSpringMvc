@@ -121,7 +121,7 @@ public class UserController {
 	@RequestMapping(value = "/users/{id}/update", method = RequestMethod.GET)
 	public String showUpdateUserForm(@PathVariable("id") int id, Model model) {
 
-		logger.debug("showUpdateUserForm() : {}", id);
+		logger.debug("showUpdateUserForm()", id);
 
 		User user = userService.findById(id);
 		model.addAttribute("userForm", user);
@@ -136,7 +136,7 @@ public class UserController {
 	@RequestMapping(value = "/users/{id}/delete", method = RequestMethod.POST)
 	public String deleteUser(@PathVariable("id") int id, final RedirectAttributes redirectAttributes) {
 
-		logger.debug("deleteUser() : {}", id);
+		logger.debug("deleteUser()", id);
 
 		userService.delete(id);
 		

@@ -111,12 +111,12 @@ public class AgendaController{
 		
 	}
 
-	// save or update user
-	@RequestMapping(value = "/agenda/add", method = RequestMethod.POST)
+	// save or update agenda
+	@RequestMapping(value = "/agenda", method = RequestMethod.POST)
 	public String saveOrUpdateAgenda(@ModelAttribute("agendaform") @Validated Agenda agenda, BindingResult result,
 			Model model, final RedirectAttributes redirectAttributes) {
 
-		loger.debug("saveOrUpdateAgenda() : {}", agenda.toString());
+		loger.debug("saveOrUpdateAgenda()", agenda.toString());
 
 		if (result.hasErrors()) {
 
@@ -220,9 +220,9 @@ public class AgendaController{
 	public String updateAgenda(@PathVariable("id") int id, Model model) {
 
 		Agenda agenda = agendaServico.findById(id);
-		model.addAttribute("agendaForm", agenda);
+		model.addAttribute("agendaform", agenda);
 
-		return "redirect:agenda/agendaform";
+		return "agenda/agendaform";
 	}
 
 	// deletar agenda

@@ -31,20 +31,41 @@
 		<%-- onsubmit="return confirm('Tem certeza que deseija salvar?') ? true : false;" --%>
 		
 
-
-		<spring:bind path="contato">
-			<div class="form-group ${status.error ? 'has-error' : ''}">
-				<label class="col-sm-2 control-label">Contato</label>
-				<div class="col-sm-10">
-					<select name="contato" id="contato" class="form-control">
-						<option value="-1" label="Select..." />
-						<c:forEach items="${contatoList}" var="user">
-							<option value="${user.id}">${user.nome}</option>
-						</c:forEach>
-					</select>
+		<c:choose>
+			<c:when test="${agendaform.isNew()}">
+				<spring:bind path="contato">
+				<div class="form-group ${status.error ? 'has-error' : ''}">
+					<label class="col-sm-2 control-label">Contato</label>
+					<div class="col-sm-10">
+						<select name="contato" id="contato" class="form-control">
+							<option value="-1" label="Select..." />
+							<c:forEach items="${contatoList}" var="user">
+								<option value="${user.id}">${user.nome}</option>
+							</c:forEach>
+						</select>
+					</div>
 				</div>
-			</div>
 		</spring:bind>
+			</c:when>
+			<c:otherwise>
+				<spring:bind path="contato">
+				<div class="form-group ${status.error ? 'has-error' : ''}">
+					<label class="col-sm-2 control-label">Contato</label>
+					<div class="col-sm-10">
+						<select name="contato" id="contato" class="form-control">
+							<option value="-1" label="Select..." />
+							<c:forEach items="${contatoList}" var="user">
+								<option value="${user.id}">${user.nome}</option>
+							</c:forEach>
+						</select>
+						<form:textarea path="contato" rows="5" class="form-control" id="obs" placeholder="Contato" />
+						<form:errors path="obs" class="control-label" />
+					</div>
+				</div>
+		</spring:bind>
+			</c:otherwise>
+		</c:choose>
+		
 
 		<spring:bind path="funcionario">
 			<div class="form-group ${status.error ? 'has-error' : ''}">
