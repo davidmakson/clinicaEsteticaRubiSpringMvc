@@ -56,7 +56,7 @@ public class UserDaoImpl implements UserDao {
 	@Override
 	public List<User> findAll() {
 
-		String sql = "SELECT * FROM users";
+		String sql = "SELECT * FROM users order by nome";
 		List<User> result = namedParameterJdbcTemplate.query(sql, new UserMapper());
 
 		return result;
@@ -99,9 +99,6 @@ public class UserDaoImpl implements UserDao {
 
 	private SqlParameterSource getSqlParameterByModel(User user) {
 
-		// Unable to handle List<String> or Array
-		// BeanPropertySqlParameterSource
-
 		MapSqlParameterSource paramSource = new MapSqlParameterSource();
 		paramSource.addValue("id", user.getId());
 		paramSource.addValue("nome", user.getNome());
@@ -110,7 +107,7 @@ public class UserDaoImpl implements UserDao {
 		paramSource.addValue("celular", user.getCelular());
 		paramSource.addValue("address", user.getAddress());
 		paramSource.addValue("passwd", user.getPassword());
-		paramSource.addValue("isFunc", user.getIsFunc());
+		paramSource.addValue("isFunc", corrigeIsFunc(user));
 		paramSource.addValue("sexo", user.getSex());
 		paramSource.addValue("cidade", user.getCidade());
 		paramSource.addValue("dtNasct", user.getDtNasct());
@@ -130,13 +127,23 @@ public class UserDaoImpl implements UserDao {
 				user.setCelular(rs.getString("celular"));
 				user.setAddress(rs.getString("address"));
 				user.setPassword(rs.getString("passwd"));
-				user.setIsFunc(rs.getBoolean("isFunc"));
+				user.setIsFunc(validaFunc(rs));
 				user.setSex(rs.getString("sexo"));
-				user.setPassword(rs.getString("cidade"));
-				user.setDtNasct(rs.getDate("dtNasct"));
+				user.setCidade(rs.getString("cidade"));
+				user.setDtNasct(rs.getString("dtNasct"));
 				user.setObs(rs.getString("obs"));
 				
 			return user;
+		}
+
+		private boolean validaFunc(ResultSet rs) throws SQLException {
+			boolean result = false;
+			if("0".equals(rs.getString("isFunc"))){
+				result = false;
+			}else if("1".equals(rs.getString("isFunc"))){
+				result = true;
+			}
+			return result;
 		}
 	}
 
@@ -151,7 +158,6 @@ public class UserDaoImpl implements UserDao {
 
 	}
 
-
 	@Override
 	public List<User> findAll(int identificador) {
 		
@@ -160,7 +166,7 @@ public class UserDaoImpl implements UserDao {
 		
 		StringBuilder sql = new StringBuilder()
 		.append(" SELECT users.nome, users.id FROM")
-		.append(" users where isFunc = :identificador");
+		.append(" users where isFunc = :identificador order by nome");
 		
 		return namedParameterJdbcTemplate.query(sql.toString(), param, getUserMapper());
 	}
@@ -180,15 +186,46 @@ public class UserDaoImpl implements UserDao {
 			}
 		};
 	}
-/*	private String convertListToDelimitedString(List<String> list) {
 
-		String result = "";
-		if (list != null) {
-			result = StringUtils.arrayToCommaDelimitedString(list.toArray());
+	@Override
+	public User findByName(String nome) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("nome", nome);
+
+		String sql = "SELECT * FROM users WHERE nome=:nome order by nome";
+
+		User result = null;
+		try {
+			result = namedParameterJdbcTemplate.queryForObject(sql, params, new UserMapper());
+		} catch (EmptyResultDataAccessException e) {
+			System.out.println("UserDaoImpl - findById - ");
+			e.printStackTrace();
 		}
+
 		return result;
+	}
+	
+	private Boolean corrigeIsFunc(User user) {
+		
+		boolean result = false;
+		
+		if("0".equals(user.getIsFunc())){
+			user.setIsFunc(false);
+		}else if("1".equals(user.getIsFunc())){
+			user.setIsFunc(true);
+		}
+		
+		return result;
+	}
+	
+	/*	private String convertListToDelimitedString(List<String> list) {
 
-	}*/
+	String result = "";
+	if (list != null) {
+		result = StringUtils.arrayToCommaDelimitedString(list.toArray());
+	}
+	return result;
 
+}*/
 
 }

@@ -34,56 +34,68 @@
 		<c:choose>
 			<c:when test="${agendaform.isNew()}">
 				<spring:bind path="contato">
-				<div class="form-group ${status.error ? 'has-error' : ''}">
-					<label class="col-sm-2 control-label">Contato</label>
-					<div class="col-sm-10">
-						<select name="contato" id="contato" class="form-control">
-							<option value="-1" label="Select..." />
-							<c:forEach items="${contatoList}" var="user">
-								<option value="${user.id}">${user.nome}</option>
-							</c:forEach>
-						</select>
+					<div class="form-group ${status.error ? 'has-error' : ''}">
+						<label class="col-sm-2 control-label">Cliente</label>
+						<div class="col-sm-10">
+							<select name="contato" id="contato" class="form-control">
+								<option value="-1" label="Select..." />
+								<c:forEach items="${contatoList}" var="user">
+									<option value="${user.id}">${user.nome}</option>
+								</c:forEach>
+							</select>
+						</div>
 					</div>
-				</div>
-		</spring:bind>
+				</spring:bind>
 			</c:when>
 			<c:otherwise>
-				<spring:bind path="contato">
-				<div class="form-group ${status.error ? 'has-error' : ''}">
-					<label class="col-sm-2 control-label">Contato</label>
-					<div class="col-sm-10">
-						<select name="contato" id="contato" class="form-control">
-							<option value="-1" label="Select..." />
-							<c:forEach items="${contatoList}" var="user">
-								<option value="${user.id}">${user.nome}</option>
-							</c:forEach>
-						</select>
-						<form:textarea path="contato" rows="5" class="form-control" id="obs" placeholder="Contato" />
-						<form:errors path="obs" class="control-label" />
+				<spring:bind path="nmContato">
+					<div class="form-group ${status.error ? 'has-error' : ''}">
+						<label class="col-sm-2 control-label">Cliente</label>
+						<div class="col-sm-10">
+							<form:input path="nmContato" type="text" class="form-control " id="nmContato" desabled="true"/>
+							<form:errors path="nmContato" class="control-label" />
+						</div>
 					</div>
-				</div>
-		</spring:bind>
+				</spring:bind>
 			</c:otherwise>
 		</c:choose>
 		
 
-		<spring:bind path="funcionario">
-			<div class="form-group ${status.error ? 'has-error' : ''}">
-				<label class="col-sm-2 control-label">Funcionário</label>
-				<div class="col-sm-10">
-					<select name="funcionario" id="funcionario"
-						class="form-control">
-						<option value="-1" label="Select..." />
-						<c:forEach items="${funcionarioList}" var="user">
-							<option value="${user.id}">${user.nome}</option>
-						</c:forEach>
-					</select>
-					<form:errors path="funcionario" class="control-label" />
-				</div>
-			</div>
-		</spring:bind>
+		<c:choose>
+			<c:when test="${agendaform.isNew()} }">
+				<spring:bind path="funcionario">
+					<div class="form-group ${status.error ? 'has-error' : ''}">
+						<label class="col-sm-2 control-label">Funcionário</label>
+						<div class="col-sm-10">
+							<select name="funcionario" id="funcionario"
+								class="form-control">
+								<option value="-1" label="Select..." />
+								<c:forEach items="${funcionarioList}" var="user">
+									<option value="${user.id}">${user.nome}</option>
+								</c:forEach>
+							</select>
+							<form:errors path="funcionario" class="control-label" />
+						</div>
+					</div>
+				</spring:bind>
+			</c:when>
+			<c:otherwise>
+				<spring:bind path="nmFuncionario">
+					<div class="form-group ${status.error ? 'has-error' : ''}">
+						<label class="col-sm-2 control-label">Funcionário</label>
+						<div class="col-sm-10">
+							<form:input path="nmFuncionario" type="text" class="form-control" id="nmFuncionario" desabled="true"/>
+							<form:errors path="nmFuncionario" class="control-label" />
+						</div>
+					</div>
+				</spring:bind>
+			</c:otherwise>
+		</c:choose>
+		
 
-		<spring:bind path="servico">
+		<c:choose>
+			<c:when test="${agendaform.isNew()}">
+				<spring:bind path="servico">
 			<div class="form-group ${status.error ? 'has-error' : ''}">
 				<label class="col-sm-2 control-label">Serviço</label>
 				<div class="col-sm-10">
@@ -97,7 +109,21 @@
 					<form:errors path="servico" class="control-label" />
 				</div>
 			</div>
-		</spring:bind>
+		</spring:bind>	
+			</c:when>
+			<c:otherwise>
+				<spring:bind path="nmServico">
+					<div class="form-group ${status.error ? 'has-error' : ''}">
+						<label class="col-sm-2 control-label">Serviço</label>
+						<div class="col-sm-10">
+							<form:input type="text" path="nmServico" id="nmServico" class="form-control" desabled="true"/>
+							<form:errors path="nmServico" class="control-label" />
+						</div>
+					</div>
+				</spring:bind>
+			</c:otherwise>
+		</c:choose>
+		
 
 		<spring:bind path="dtAgenda">
 			<div class="form-group ${status.error ? 'has-error' : ''}">

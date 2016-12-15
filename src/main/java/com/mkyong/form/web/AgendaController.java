@@ -73,6 +73,7 @@ public class AgendaController{
 		this.servicoService = servicoService;
 	}
 	
+	// lista agenda
 	@RequestMapping(value = "/agenda", method = RequestMethod.GET)
 	public String showAll(Model model) {
 
@@ -82,10 +83,11 @@ public class AgendaController{
 		return "agenda/list";
 	}
 
+	//show add agenda
 	@RequestMapping(value = "/agenda/add", method = RequestMethod.GET)
 	public String saveOrUpdate(Model model) {
 
-		loger.debug("/agenda/agendaform");
+		loger.debug("/agenda/add");
 		try {
 			populaCombos(model);
 		} catch (Exception e) {
@@ -95,23 +97,7 @@ public class AgendaController{
 		return "agenda/agendaform";
 	}
 
-	private void populaCombos(Model model) {
-
-		Agenda agenda = new Agenda();
-		List<User> contatoList = userService.findAll(CLIENTE);
-		List<User> funcionarioList = userService.findAll(FUNCIONARIO);
-		List<Servico> servicoList = servicoService.findAll(SERVICO);
-		
-		//model.addAttribute("servicoList", servicoService.findAll(PRODUTO));
-		
-		model.addAttribute("agendaform", agenda);
-		model.addAttribute("funcionarioList",funcionarioList);
-		model.addAttribute("contatoList", contatoList);
-		model.addAttribute("servicoList", servicoList);
-		
-	}
-
-	// save or update agenda
+	// salvar ou atualizar agenda
 	@RequestMapping(value = "/agenda", method = RequestMethod.POST)
 	public String saveOrUpdateAgenda(@ModelAttribute("agendaform") @Validated Agenda agenda, BindingResult result,
 			Model model, final RedirectAttributes redirectAttributes) {
@@ -141,28 +127,7 @@ public class AgendaController{
 
 	}
 
-	private void formataData(Agenda agenda) {
-		
-		//from 28/12/1988 to 1998-10-25
-		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
-		SimpleDateFormat sdfDtAgenda = new SimpleDateFormat("yyyy-MM-dd");
-		
-		Date myDate = null;
-		
-		try {
-			//parser = String to Date
-			myDate = sdf.parse(agenda.getDtAgenda());
-		} catch (ParseException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		//formater = Date to String
-		String dtAgenda = sdfDtAgenda.format(myDate);
-		
-		agenda.setDtAgenda(dtAgenda);
-		
-	}
-	//para testar..
+	//para testar ajax
     @RequestMapping(value = "action/faz-alguma-coisa", method=RequestMethod.GET)
     public 		@ResponseBody Object retornaAlgo(Model model, 
                 @ModelAttribute("usuarioLogado") User user,
@@ -203,7 +168,7 @@ public class AgendaController{
 		return agendado;
 	}
 
-	// show agendaForm
+	// mostra lista de agenda
 	@RequestMapping(value = "agenda/showAgenda", method = RequestMethod.GET)
 	public String showAgendaForm(Model model) {
 
@@ -215,12 +180,13 @@ public class AgendaController{
 		return "agenda/list";
 	}
 
-	// show agenda form to update
+	// mostra agenda form para atualizar
 	@RequestMapping(value = "agenda/{id}/update", method = RequestMethod.GET)
 	public String updateAgenda(@PathVariable("id") int id, Model model) {
 
 		Agenda agenda = agendaServico.findById(id);
 		model.addAttribute("agendaform", agenda);
+		setNomeCombos(agenda);
 
 		return "agenda/agendaform";
 	}
@@ -239,7 +205,52 @@ public class AgendaController{
 
 		Agenda agenda = agendaServico.findById(id);
 		model.addAttribute("agenda", agenda);
-
+		setNomeCombos(agenda);
+		
 		return "agenda/show";
+	}
+	
+	private void setNomeCombos(Agenda agenda) {
+		agenda.setNmContato(userService.findById(agenda.getContato()).getNome().toString());
+		agenda.setNmFuncionario(userService.findById(agenda.getFuncionario()).getNome().toString());
+		agenda.setNmServico(servicoService.findById(agenda.getServico()).getNome().toString());
+	}
+	
+	private void formataData(Agenda agenda) {
+		
+		//from 28/12/1988 to 1998-10-25
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
+		SimpleDateFormat sdfDtAgenda = new SimpleDateFormat("yyyy-MM-dd");
+		
+		Date myDate = null;
+		
+		try {
+			//parser = String to Date
+			myDate = sdf.parse(agenda.getDtAgenda());
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		//formater = Date to String
+		String dtAgenda = sdfDtAgenda.format(myDate);
+		
+		agenda.setDtAgenda(dtAgenda);
+		
+	}
+	
+	private void populaCombos(Model model) {
+
+		Agenda agenda = new Agenda();
+		List<User> contatoList = userService.findAll(CLIENTE);
+		List<User> funcionarioList = userService.findAll(FUNCIONARIO);
+		List<Servico> servicoList = servicoService.findAll(SERVICO);
+		
+		//model.addAttribute("servicoList", servicoService.findAll(PRODUTO));
+		
+		model.addAttribute("agendaform", agenda);
+		model.addAttribute("funcionarioList",funcionarioList);
+		model.addAttribute("contatoList", contatoList);
+		model.addAttribute("servicoList", servicoList);
+		
 	}
 }

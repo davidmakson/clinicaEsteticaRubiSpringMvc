@@ -9,6 +9,13 @@ public class Agenda {
 	Integer id;
 	Integer contato;
 	Integer funcionario;
+	Integer servico;
+	String nmContato;
+	String nmFuncionario;
+	String nmServico;
+	String dtAgenda;
+	String horaAgenda;
+	String obs;
 	
 	public Agenda() {
 	}
@@ -25,14 +32,36 @@ public class Agenda {
 		this.obs = obs;
 	}
 
-	Integer servico;
-	String dtAgenda;
-	String horaAgenda;
-	String obs;
+	public String getNmContato() {
+		return nmContato;
+	}
 	
 
+	public void setNmContato(String nmContato) {
+		this.nmContato = nmContato;
+	}
 	
+
+	public String getNmFuncionario() {
+		return nmFuncionario;
+	}
 	
+
+	public void setNmFuncionario(String nmFuncionario) {
+		this.nmFuncionario = nmFuncionario;
+	}
+	
+
+	public String getNmServico() {
+		return nmServico;
+	}
+	
+
+	public void setNmServico(String nmServico) {
+		this.nmServico = nmServico;
+	}
+	
+
 	public String getHoraAgenda() {
 		return horaAgenda;
 	}

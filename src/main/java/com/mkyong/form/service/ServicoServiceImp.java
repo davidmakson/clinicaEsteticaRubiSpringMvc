@@ -54,4 +54,5 @@ public class ServicoServiceImp implements ServicoService {
 		return servicoDao.findAll(servico);
 	}
 
+
 }

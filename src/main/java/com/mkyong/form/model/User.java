@@ -1,7 +1,8 @@
 package com.mkyong.form.model;
 
 import java.util.Date;
-import java.util.List;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class User {
 	// form:hidden - hidden value
@@ -38,24 +39,22 @@ public class User {
 	String cidade;
 
 	// form:select - multiple=true - dropdown - multiple select
-	Date dtNasct;
+	String dtNasct;
 	
 	String obs;
-	public String getTelefone() {
-		return telefone;
-	}
 	
+	public String getTelefone() {
+		return this.telefone;
+	}
 
 	public void setTelefone(String telefone) {
 		this.telefone = telefone;
 	}
-	
 
 	public String getCelular() {
-		return celular;
+		return this.celular;
 	}
 	
-
 	public void setCelular(String celular) {
 		this.celular = celular;
 	}
@@ -65,7 +64,7 @@ public class User {
 	}
 
 	public Integer getId() {
-		return id;
+		return this.id;
 	}
 
 	public void setId(Integer id) {
@@ -73,7 +72,7 @@ public class User {
 	}
 
 	public String getNome() {
-		return nome;
+		return this.nome;
 	}
 
 	public void setNome(String nome) {
@@ -81,7 +80,7 @@ public class User {
 	}
 
 	public String getEmail() {
-		return email;
+		return this.email;
 	}
 
 	public void setEmail(String email) {
@@ -89,7 +88,7 @@ public class User {
 	}
 
 	public String getAddress() {
-		return address;
+		return this.address;
 	}
 
 	public void setAddress(String address) {
@@ -97,7 +96,7 @@ public class User {
 	}
 
 	public String getPassword() {
-		return password;
+		return this.password;
 	}
 
 	public void setPassword(String password) {
@@ -105,7 +104,7 @@ public class User {
 	}
 
 	public String getConfirmPassword() {
-		return confirmPassword;
+		return this.confirmPassword;
 	}
 
 	public void setConfirmPassword(String confirmPassword) {
@@ -113,7 +112,7 @@ public class User {
 	}
 
 	public boolean getIsFunc() {
-		return isFunc;
+		return this.isFunc;
 	}
 
 	public void setIsFunc(boolean isFunc) {
@@ -121,23 +120,19 @@ public class User {
 	}
 
 	public String getSex() {
-		return sex;
+		return this.sex;
 	}
 
 	public void setSex(String sex) {
 		this.sex = sex;
 	}
 
-	public Date getDtNasct() {
-		return dtNasct;
-	}
-
-	public void setNumber(Date dtNasct) {
-		this.dtNasct = dtNasct;
+	public String getDtNasct() {
+		return this.dtNasct;
 	}
 
 	public String getCidade() {
-		return cidade;
+		return this.cidade;
 	}
 
 	public void setCidade(String cidade) {
@@ -145,20 +140,14 @@ public class User {
 	}
 
 	public String getObs() {
-		return obs;
+		return this.obs;
 	}
 	
-
 	public void setObs(String obs) {
 		this.obs = obs;
 	}
 
-	public void setDtNasct(Date dtNasct) {
+	public void setDtNasct(String dtNasct) {
 		this.dtNasct = dtNasct;
-	}
-	
-	@Override
-	public String toString(){
-		return this.nome;
 	}
 }

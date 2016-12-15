@@ -18,5 +18,7 @@ public interface UserDao {
 
 	List<User> findAll(int identificador);
 
+	User findByName(String nome);
+
 
 }
