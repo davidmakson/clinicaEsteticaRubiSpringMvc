@@ -1,0 +1,61 @@
+CREATE TABLE FUNCIONARIO (
+id INT NOT NULL,
+email VARCHAR(20),
+paswd VARCHAR(20) NOT NULL,
+dtNasct date,
+nome VARCHAR(20) NOT NULL,
+cidade VARCHAR(20),
+bairro VARCHAR(20),
+endereco VARCHAR(100),
+obs VARCHAR(100),
+telefone INTEGER(10) NOT NULL,
+celular INTEGER(10) NOT NULL,
+cpf INTEGER(11) NOT NULL,
+primary key(id,cpf)) ENGINE=INNODB;
+
+CREATE TABLE CLIENTE (
+id INT NOT NULL,
+email date,
+dtNasct VARCHAR(20),
+nome VARCHAR(20) NOT NULL,
+cidade VARCHAR(20),
+bairro VARCHAR(20),
+endereco VARCHAR(100),
+telefone INTEGER(10) NOT NULL,
+celular INTEGER(10) NOT NULL,
+obs VARCHAR(100),
+cpf INTEGER(11) NOT NULL,
+primary key(id,cpf)) ENGINE=INNODB;
+
+CREATE TABLE SERVICO (
+id INT NOT NULL,
+nome VARCHAR(20) NOT NULL,
+preco DECIMAL NOT NULL,
+tempo time NOT NULL,
+primary key(id)) ENGINE=INNODB;
+
+CREATE TABLE AGENDA (
+    id INT NOT NULL AUTO_INCREMENT,
+    dtAgenda DATE,
+    hrAgenda TIME,
+    stAgenda DECIMAL,
+    servico_agenda INT NOT NULL,
+    funcionario_agenda INT NOT NULL,
+    cliente_agenda INT NOT NULL,
+    
+    PRIMARY KEY(id, dtAgenda,hrAgenda,servico_agenda,funcionario_agenda,cliente_agenda),
+    INDEX(servico_agenda),
+    INDEX(funcionario_agenda),
+    INDEX(cliente_agenda),
+    
+    FOREIGN KEY (servico_agenda)
+      REFERENCES SERVICO(id),
+	
+    FOREIGN KEY (funcionario_agenda)
+      REFERENCES FUNCIONARIO(id),
+	
+    FOREIGN KEY (cliente_agenda)
+      REFERENCES CLIENTE(id)
+      
+)   ENGINE=INNODB;
+
